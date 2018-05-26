@@ -27,7 +27,12 @@ contract vote {
 	function hasVoted(address, entityAddress) public view returns(bool voteRecordExists){
 		return voted[entityAddress];
 	}
-	function vote() {
-		// constructor
+
+	function voteCount(uint candidate) public view returns(uint votes) {
+		if (candidate == 1){ return clintonCount;}
+		else if (candidate == 2){ return trumpCount;}
+		else{
+			revert();
+		}
 	}
 }
