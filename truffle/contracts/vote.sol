@@ -7,24 +7,24 @@ contract vote {
 	uint clintonCount;
 	uint trumpCount;
 
-	event voteEvent((uint eventID, string message));
+	event voteEvent(uint eventID, string message);
 
 	function castVote(address voter, uint candidate) public {
 		if(hasVoted(voter)){
-			voteEvent(0, "Account has already voted");
+			emit voteEvent(0, "Account has already voted");
 			return;
 		}
 		if (candidate == 1){ clintonCount++; }
 		else if (candidate == 2){ trumpCount++; }
 		else{
-			voteEvent(1, "Not a valid candidate.");
+			emit voteEvent(1, "Not a valid candidate.");
 			return;
 		}
 		voted[voter] = true;
-		voteEvent(2, "Vote cast. ");
+		emit voteEvent(2, "Vote cast. ");
 		return;
 	}
-	function hasVoted(address, entityAddress) public view returns(bool voteRecordExists){
+	function hasVoted(address entityAddress) public view returns(bool voteRecordExists){
 		return voted[entityAddress];
 	}
 
