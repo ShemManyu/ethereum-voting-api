@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 var etherUrl = "ws://127.0.0.1:7545";
-var contract = "0xfa3fffca0fcce4e75a1105eb0f9d97ee01d7f0aa";
+var contract = "0x4610b7b59920b760d1164406a6f13f09043b6af3";
 var httpPort = 8080;
 var web3 = new Web3();
 web3.setProvider(new web3.providers.WebsocketProvider(etherUrl));
