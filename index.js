@@ -1,6 +1,7 @@
 const Web3 = require('web3');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
@@ -10,17 +11,17 @@ var httpPort = 8080;
 var web3 = new Web3();
 web3.setProvider(new web3.providers.WebsocketProvider(etherUrl));
 
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+//CORS
 app.use(function(req, res, next){
     console.log(req.method + " " + req.url);
     next();
 });
 
-app.use(express.static("public"));
+//app.use(express.static("public"));
 
 var abi = [
     {
@@ -119,6 +120,8 @@ var abi = [
 ];
 
 contractInstance = new web3.eth.Contract(abi, contract);
+
+app.use(cors());
 
 app.get("/count/:candidate", function (req, res) {
     contractInstance.methods.voteCount(req.params.candidate).call(function(error, data){
