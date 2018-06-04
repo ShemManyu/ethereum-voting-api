@@ -4,8 +4,8 @@ pragma solidity ^0.4.4;
 contract vote {
 
 	mapping (address => bool) public voted;
-	uint clintonCount;
-	uint trumpCount;
+	uint candidate1;
+	uint candidate2;
 
 	event voteEvent(uint eventID, string message);
 
@@ -14,8 +14,8 @@ contract vote {
 			emit voteEvent(0, "Account has already voted");
 			return;
 		}
-		if (candidate == 1){ clintonCount++; }
-		else if (candidate == 2){ trumpCount++; }
+		if (candidate == 1){ candidate1++; }
+		else if (candidate == 2){ candidate2++; }
 		else{
 			emit voteEvent(1, "Not a valid candidate.");
 			return;
@@ -29,8 +29,8 @@ contract vote {
 	}
 
 	function voteCount(uint candidate) public view returns(uint votes) {
-		if (candidate == 1){ return clintonCount;}
-		else if (candidate == 2){ return trumpCount;}
+		if (candidate == 1){ return candidate1;}
+		else if (candidate == 2){ return candidate2;}
 		else{
 			revert();
 		}
